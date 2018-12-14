@@ -8,9 +8,9 @@ export function handleInitialData() {
       API.fetchPosts(),
       API.fetchCategories(),
     ])
-      .then(([posts, categories]) => {
+      .then(([posts, categories, comments]) => {
         dispatch(receivePosts(posts));
         dispatch(receiveCategories(categories));
       });
   };
-};
+}

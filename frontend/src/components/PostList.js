@@ -16,7 +16,13 @@ class PostList extends Component {
 
   render() {
     const { sortBy } = this.state;
-    const { posts, category } = this.props;
+    const {
+      posts,
+      category,
+      handleLike,
+      handleDislike,
+      handleToggleForm,
+    } = this.props;
 
     const filteredPosts = category === null
       ? posts
@@ -25,17 +31,33 @@ class PostList extends Component {
     const sortedPosts = sortOn(filteredPosts, sortBy);
 
     return (
-      <div>
+      <div className="post-list-container">
         <PostListTitle category={category} />
-        <PostListSorter handler={this.sort} value={sortBy} />
+        <PostListSorter
+          handler={this.sort}
+          value={sortBy}
+          disabled={sortedPosts.length < 2}
+        />
         {sortedPosts.length < 1
-          ? <p>Nenhum post nesta categoria</p>
-          : <ul>
-            {sortedPosts.map((post) => (
-              <PostListItem key={post.id} post={post} />
-            ))}
-          </ul>
+          ? <p>Nenhum post</p>
+          : (
+            <div>
+              <ul>
+                {sortedPosts.map((post) => (
+                  <PostListItem
+                    key={post.id}
+                    post={post}
+                    handleLike={handleLike}
+                    handleDislike={handleDislike}
+                  />
+                ))}
+              </ul>
+            </div>
+          )
         }
+        <button onClick={() => handleToggleForm(true)}>
+          ADICIONAR POST
+        </button>
       </div>
     );
   }
@@ -54,6 +76,9 @@ PostList.propTypes = {
     voteScore: PropTypes.number.isRequired,
   })).isRequired,
   category: PropTypes.string,
+  handleLike: PropTypes.func.isRequired,
+  handleDislike: PropTypes.func.isRequired,
+  handleToggleForm: PropTypes.func.isRequired,
 };
 
 PostList.defaultProps = {

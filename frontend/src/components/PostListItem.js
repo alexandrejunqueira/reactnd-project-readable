@@ -1,13 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
+import { formatPostInfo } from "../utils/helpers";
 
-const PostListItem = ({ post }) => {
+const PostListItem = ({ post, handleLike, handleDislike }) => {
   return (
     <li>
-      <NavLink to={`/${post.category}/${post.id}`}>
-        {post.title}
-      </NavLink>
+      <div className="post-list-item-container">
+        <h3 className="post-title">{post.title}</h3>
+        <p className="post-info">{formatPostInfo(post)}</p>
+        <p className="post-info">Comentários: {post.commentCount} - Votos: {post.voteScore}</p>
+        <div className="post-buttons">
+          <NavLink className="post-details-link" to={`/${post.category}/${post.id}`}>
+            DETALHES
+          </NavLink>
+          <button onClick={() => handleLike(post.id)}>
+            LIKE
+          </button>
+          <button onClick={() => handleDislike(post.id)}>
+            DISLIKE
+          </button>
+        </div>
+      </div>
     </li>
   );
 };
@@ -24,6 +38,8 @@ PostListItem.propTypes = {
     title: PropTypes.string.isRequired,
     voteScore: PropTypes.number.isRequired,
   }).isRequired,
+  handleLike: PropTypes.func.isRequired,
+  handleDislike: PropTypes.func.isRequired,
 };
 
 export default PostListItem;

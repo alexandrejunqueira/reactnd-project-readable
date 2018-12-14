@@ -6,7 +6,7 @@ const PostListTitle = ({ category }) => {
     <h3>
       {category === null
         ? <span>Posts de todas as categorias</span>
-        : <span>Posts da categoria: {category}</span>
+        : <span>Posts da categoria: <em className="post-list-title-category">{category}</em></span>
       }
     </h3>
   );

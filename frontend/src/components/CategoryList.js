@@ -7,8 +7,8 @@ const CategoryList = ({ categories }) => {
     <div>
       <h3>Categorias</h3>
       <ul>
-        {Object.keys(categories).map((key) => (
-          <CategoryListItem key={categories[key].path} category={categories[key]} />
+        {categories.map((category) => (
+          <CategoryListItem key={category.path} category={category} />
         ))}
       </ul>
     </div>
@@ -16,7 +16,10 @@ const CategoryList = ({ categories }) => {
 };
 
 CategoryList.propTypes = {
-  categories: PropTypes.object.isRequired,
+  categories: PropTypes.arrayOf(PropTypes.shape({
+    path: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  })).isRequired,
 };
 
 export default CategoryList;

@@ -12,3 +12,150 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+/* Forms */
+
+form {
+  width: 400px;
+}
+
+input,
+textarea {
+  width: 99%;
+  font-size: 1em;
+  padding: .4em 0;
+  line-height: 20px;
+  margin-bottom: 1em;
+  border: solid 1px #b6b6b6;
+}
+
+.buttons {
+  text-align: right;
+}
+
+.buttons button {
+  margin-left: .5em;
+}
+
+.form-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+/* Posts */
+
+.post-title {
+  margin: 0 0 .4em 0;
+}
+
+.post-info {
+  font-size: .8em;
+  margin: 0 0 1em 0;
+}
+
+.post-body {
+  margin: 0 0 1em 0;
+}
+
+.post-buttons button {
+  margin-right: .5em;
+}
+
+.post-details-link {
+  color: #ff13a5;
+  font-size: .8em;
+  margin-right: .5em;
+}
+
+/* Comments */
+
+.comment-title {
+  margin: 0 0 .4em 0;
+}
+
+.comment-info {
+  font-size: .8em;
+  margin: 0 0 .8em 0;
+}
+
+.comment-buttons button {
+  margin-right: .5em;
+}
+
+.comment-list-item-container {
+  margin-bottom: 1em;
+}
+
+/* Loading e Not Found */
+
+.loading,
+.not-found {
+  font-size: 3em;
+  text-align: center;
+  padding: 3em 0;
+  color: #ff13a5;
+}
+
+/* Component: App */
+
+.app-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: aliceblue;
+}
+
+/* Component: Nav */
+
+.nav-container {
+  line-height: 3em;
+  padding-left: 1.5em;
+  background: #ff13a5;
+}
+
+.nav-link {
+  color: aliceblue;
+}
+
+/* Component: PagePosts */
+
+.page-posts-container {
+  padding: 1em;
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.page-posts-container > * {
+  flex: 100%;
+}
+
+/* Component: PagePostDetail */
+
+.page-post-detail-container {
+  padding: 1em;
+  margin-top: 1em;
+}
+
+/* Component: PostList */
+
+.post-list-container {
+  min-width: 600px;
+}
+
+/* Component: PostListItem */
+
+.post-list-item-container {
+  margin-bottom: 1.5em;
+}
+
+/* Component: PostListTitle */
+
+.post-list-title-category {
+  color: #ff13a5;
+  font-style: normal;
+}

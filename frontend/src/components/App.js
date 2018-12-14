@@ -5,6 +5,7 @@ import { handleInitialData } from '../actions/shared';
 import Nav from './Nav';
 import PagePosts from './PagePosts';
 import PagePostDetail from './PagePostDetail';
+import uuid from 'uuid/v1';
 
 class App extends Component {
   componentDidMount () {
@@ -16,16 +17,15 @@ class App extends Component {
     return (
       <Router>
         <div className='app-container'>
-          <div>
-            <Nav />
-            {Object.keys(posts).length === 0 || categories.length === 0
-              ? <span>Loading...</span>
-              : <div>
-                  <Route exact path='/' component={PagePosts} />
-                  <Route exact path='/:category' component={PagePosts} />
-                  <Route exact path='/:category/:post_id' component={PagePostDetail} />
-                </div>}
-          </div>
+          <Nav />
+          {Object.keys(posts).length === 0 && Object.keys(categories).length === 0
+            ? <div className="loading">LOADING</div>
+            : <div>
+                <Route exact path='/' render={props => <PagePosts {...props} key={uuid()} />} />
+                <Route exact path='/:category' component={PagePosts} />
+                <Route exact path='/:category/:post_id' component={PagePostDetail} />
+              </div>
+          }
         </div>
       </Router>
     );
@@ -35,7 +35,7 @@ class App extends Component {
 function mapStateToProps ({ posts, categories }) {
   return {
     posts,
-    categories,
+    categories
   }
 }
 
