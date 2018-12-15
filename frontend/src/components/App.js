@@ -9,8 +9,8 @@ import uuid from 'uuid/v1';
 
 class App extends Component {
   componentDidMount () {
-    const { dispatch } = this.props;
-    dispatch(handleInitialData());
+    const { handleInitialData } = this.props;
+    handleInitialData();
   }
   render() {
     const { posts, categories } = this.props;
@@ -32,11 +32,15 @@ class App extends Component {
   }
 }
 
-function mapStateToProps ({ posts, categories }) {
+const mapStateToProps = ({ posts, categories }) => {
   return {
     posts,
     categories
   }
-}
+};
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = dispatch => ({
+  handleInitialData: () => dispatch(handleInitialData()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

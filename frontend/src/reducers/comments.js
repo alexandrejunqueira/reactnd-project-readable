@@ -7,6 +7,7 @@ import {
 } from "../actions/comments";
 
 export default function comments (state = {}, action) {
+  let updatedComments;
   switch (action.type) {
     case RECEIVE_COMMENTS :
       return {
@@ -14,22 +15,27 @@ export default function comments (state = {}, action) {
         [action.postId]: action.comments,
       };
     case ADD_COMMENT :
+      updatedComments = [...state[action.comment.parentId]];
+      updatedComments.push(action.comment);
       return {
         ...state,
-        ...state[action.comment.parentId].push(action.comment),
+        [action.comment.parentId]: updatedComments,
       };
     case VOTE_COMMENT :
     case EDIT_COMMENT :
+      updatedComments = [...state[action.comment.parentId]]
+        .filter(comment => comment.id !== action.comment.id);
+      updatedComments.push(action.comment);
       return {
         ...state,
-        ...state[action.comment.parentId][action.comment.id] = action.comment,
+        [action.comment.parentId]: updatedComments,
       };
     case DELETE_COMMENT :
-      const comments = state[action.comment.parentId]
+      updatedComments = [...state[action.comment.parentId]]
         .filter(comment => comment.id !== action.comment.id);
       return {
         ...state,
-        ...state[action.comment.parentId] = comments,
+        [action.comment.parentId]: updatedComments,
       };
     default:
       return state;
